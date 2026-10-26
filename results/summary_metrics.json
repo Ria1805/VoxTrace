@@ -1,0 +1,566 @@
+{
+  "metadata": {
+    "git_commit": "935ce95a3b0f94f34ddb3f77f311e5bbb966cd13",
+    "seed": 42,
+    "python_version": "3.9.6",
+    "torch_version": "2.8.0",
+    "torchaudio_version": "2.8.0",
+    "sklearn_version": "1.6.1",
+    "librosa_version": "0.11.0",
+    "timestamp": "2026-10-26 23:31:22"
+  },
+  "clean_detection_rate": 0.72,
+  "itw_held_out_real_clips": 8633,
+  "itw_clean_fpr": 0.03845708328506892,
+  "itw_telephony_fpr": 0.4229120815475501,
+  "audio_whitebox": [
+    {
+      "model": "AudioAdapter",
+      "attack": "FGSM",
+      "eps": 0.0005,
+      "steps": 1,
+      "restarts": 1,
+      "evasion_rate": 0.1666666716337204,
+      "median_snr_db": 56.412879943847656,
+      "n_attacked": 18,
+      "clean_detection_rate": 0.72
+    },
+    {
+      "model": "AudioAdapter",
+      "attack": "FGSM",
+      "eps": 0.001,
+      "steps": 1,
+      "restarts": 1,
+      "evasion_rate": 0.3333333432674408,
+      "median_snr_db": 50.39232635498047,
+      "n_attacked": 18,
+      "clean_detection_rate": 0.72
+    },
+    {
+      "model": "AudioAdapter",
+      "attack": "FGSM",
+      "eps": 0.002,
+      "steps": 1,
+      "restarts": 1,
+      "evasion_rate": 0.5,
+      "median_snr_db": 44.37168502807617,
+      "n_attacked": 18,
+      "clean_detection_rate": 0.72
+    },
+    {
+      "model": "AudioAdapter",
+      "attack": "FGSM",
+      "eps": 0.005,
+      "steps": 1,
+      "restarts": 1,
+      "evasion_rate": 0.8333333134651184,
+      "median_snr_db": 36.41288375854492,
+      "n_attacked": 18,
+      "clean_detection_rate": 0.72
+    },
+    {
+      "model": "AudioAdapter",
+      "attack": "FGSM",
+      "eps": 0.01,
+      "steps": 1,
+      "restarts": 1,
+      "evasion_rate": 0.8888888955116272,
+      "median_snr_db": 30.39228057861328,
+      "n_attacked": 18,
+      "clean_detection_rate": 0.72
+    },
+    {
+      "model": "AudioAdapter",
+      "attack": "PGD-20",
+      "eps": 0.0005,
+      "steps": 20,
+      "restarts": 1,
+      "evasion_rate": 0.8888888955116272,
+      "median_snr_db": 57.50481033325195,
+      "n_attacked": 18,
+      "clean_detection_rate": 0.72
+    },
+    {
+      "model": "AudioAdapter",
+      "attack": "PGD-20",
+      "eps": 0.001,
+      "steps": 20,
+      "restarts": 1,
+      "evasion_rate": 1.0,
+      "median_snr_db": 52.13670349121094,
+      "n_attacked": 18,
+      "clean_detection_rate": 0.72
+    },
+    {
+      "model": "AudioAdapter",
+      "attack": "PGD-20",
+      "eps": 0.002,
+      "steps": 20,
+      "restarts": 1,
+      "evasion_rate": 1.0,
+      "median_snr_db": 47.13096618652344,
+      "n_attacked": 18,
+      "clean_detection_rate": 0.72
+    },
+    {
+      "model": "AudioAdapter",
+      "attack": "PGD-20",
+      "eps": 0.005,
+      "steps": 20,
+      "restarts": 1,
+      "evasion_rate": 1.0,
+      "median_snr_db": 40.063812255859375,
+      "n_attacked": 18,
+      "clean_detection_rate": 0.72
+    },
+    {
+      "model": "AudioAdapter",
+      "attack": "PGD-20",
+      "eps": 0.01,
+      "steps": 20,
+      "restarts": 1,
+      "evasion_rate": 1.0,
+      "median_snr_db": 33.993751525878906,
+      "n_attacked": 18,
+      "clean_detection_rate": 0.72
+    },
+    {
+      "model": "AudioAdapter",
+      "attack": "PGD-50-R1",
+      "eps": 0.001,
+      "steps": 50,
+      "restarts": 1,
+      "evasion_rate": 0.8888888955116272,
+      "median_snr_db": 52.328514099121094,
+      "n_attacked": 18,
+      "clean_detection_rate": 0.72
+    },
+    {
+      "model": "AudioAdapter",
+      "attack": "PGD-50-R5",
+      "eps": 0.001,
+      "steps": 50,
+      "restarts": 5,
+      "evasion_rate": 1.0,
+      "median_snr_db": 51.81144714355469,
+      "n_attacked": 18,
+      "clean_detection_rate": 0.72
+    },
+    {
+      "model": "AudioAdapter",
+      "attack": "PGD-100-R1",
+      "eps": 0.001,
+      "steps": 100,
+      "restarts": 1,
+      "evasion_rate": 0.8888888955116272,
+      "median_snr_db": 51.97797393798828,
+      "n_attacked": 18,
+      "clean_detection_rate": 0.72
+    },
+    {
+      "model": "AudioAdapter",
+      "attack": "PGD-100-R5",
+      "eps": 0.001,
+      "steps": 100,
+      "restarts": 5,
+      "evasion_rate": 1.0,
+      "median_snr_db": 51.273704528808594,
+      "n_attacked": 18,
+      "clean_detection_rate": 0.72
+    },
+    {
+      "model": "AudioAdapter",
+      "attack": "RandomNoise",
+      "eps": 0.0005,
+      "steps": 0,
+      "restarts": 0,
+      "evasion_rate": 0.1111111119389534,
+      "median_snr_db": 56.412879943847656,
+      "n_attacked": 18,
+      "clean_detection_rate": 0.72
+    },
+    {
+      "model": "AudioAdapter",
+      "attack": "RandomNoise",
+      "eps": 0.001,
+      "steps": 0,
+      "restarts": 0,
+      "evasion_rate": 0.0555555559694767,
+      "median_snr_db": 50.39232635498047,
+      "n_attacked": 18,
+      "clean_detection_rate": 0.72
+    },
+    {
+      "model": "AudioAdapter",
+      "attack": "RandomNoise",
+      "eps": 0.002,
+      "steps": 0,
+      "restarts": 0,
+      "evasion_rate": 0.2777777910232544,
+      "median_snr_db": 44.37168502807617,
+      "n_attacked": 18,
+      "clean_detection_rate": 0.72
+    },
+    {
+      "model": "AudioAdapter",
+      "attack": "RandomNoise",
+      "eps": 0.005,
+      "steps": 0,
+      "restarts": 0,
+      "evasion_rate": 1.0,
+      "median_snr_db": 36.41288375854492,
+      "n_attacked": 18,
+      "clean_detection_rate": 0.72
+    },
+    {
+      "model": "AudioAdapter",
+      "attack": "RandomNoise",
+      "eps": 0.01,
+      "steps": 0,
+      "restarts": 0,
+      "evasion_rate": 1.0,
+      "median_snr_db": 30.39228057861328,
+      "n_attacked": 18,
+      "clean_detection_rate": 0.72
+    }
+  ],
+  "video_whitebox": [
+    {
+      "model": "VideoAdapter (Placeholder)",
+      "attack": "FGSM",
+      "eps_norm": 0.002,
+      "eps_pixel_255": 0.255,
+      "evasion_rate": 0.0,
+      "n_attacked": 15,
+      "clean_detection_rate": 1.0
+    },
+    {
+      "model": "VideoAdapter (Placeholder)",
+      "attack": "PGD-20",
+      "eps_norm": 0.002,
+      "eps_pixel_255": 0.255,
+      "evasion_rate": 0.0,
+      "n_attacked": 15,
+      "clean_detection_rate": 1.0
+    },
+    {
+      "model": "VideoAdapter (Placeholder)",
+      "attack": "FGSM",
+      "eps_norm": 0.005,
+      "eps_pixel_255": 0.6375000000000001,
+      "evasion_rate": 0.06666667014360428,
+      "n_attacked": 15,
+      "clean_detection_rate": 1.0
+    },
+    {
+      "model": "VideoAdapter (Placeholder)",
+      "attack": "PGD-20",
+      "eps_norm": 0.005,
+      "eps_pixel_255": 0.6375000000000001,
+      "evasion_rate": 0.13333334028720856,
+      "n_attacked": 15,
+      "clean_detection_rate": 1.0
+    },
+    {
+      "model": "VideoAdapter (Placeholder)",
+      "attack": "FGSM",
+      "eps_norm": 0.01,
+      "eps_pixel_255": 1.2750000000000001,
+      "evasion_rate": 0.800000011920929,
+      "n_attacked": 15,
+      "clean_detection_rate": 1.0
+    },
+    {
+      "model": "VideoAdapter (Placeholder)",
+      "attack": "PGD-20",
+      "eps_norm": 0.01,
+      "eps_pixel_255": 1.2750000000000001,
+      "evasion_rate": 0.8666666746139526,
+      "n_attacked": 15,
+      "clean_detection_rate": 1.0
+    },
+    {
+      "model": "VideoAdapter (Placeholder)",
+      "attack": "FGSM",
+      "eps_norm": 0.02,
+      "eps_pixel_255": 2.5500000000000003,
+      "evasion_rate": 1.0,
+      "n_attacked": 15,
+      "clean_detection_rate": 1.0
+    },
+    {
+      "model": "VideoAdapter (Placeholder)",
+      "attack": "PGD-20",
+      "eps_norm": 0.02,
+      "eps_pixel_255": 2.5500000000000003,
+      "evasion_rate": 1.0,
+      "n_attacked": 15,
+      "clean_detection_rate": 1.0
+    },
+    {
+      "model": "VideoAdapter (Placeholder)",
+      "attack": "FGSM",
+      "eps_norm": 0.05,
+      "eps_pixel_255": 6.375,
+      "evasion_rate": 1.0,
+      "n_attacked": 15,
+      "clean_detection_rate": 1.0
+    },
+    {
+      "model": "VideoAdapter (Placeholder)",
+      "attack": "PGD-20",
+      "eps_norm": 0.05,
+      "eps_pixel_255": 6.375,
+      "evasion_rate": 1.0,
+      "n_attacked": 15,
+      "clean_detection_rate": 1.0
+    }
+  ],
+  "telephony_attacks": [
+    {
+      "scenario": "PostHoc_Telephony",
+      "eps": 0.0005,
+      "evasion_before_filter": 0.9444444179534912,
+      "evasion_after_filter": 0.9444444179534912,
+      "evasion_survived": true,
+      "median_snr_db": -1.741581916809082
+    },
+    {
+      "scenario": "PostHoc_Telephony",
+      "eps": 0.001,
+      "evasion_before_filter": 1.0,
+      "evasion_after_filter": 1.0,
+      "evasion_survived": true,
+      "median_snr_db": -1.7415895462036133
+    },
+    {
+      "scenario": "PostHoc_Telephony",
+      "eps": 0.002,
+      "evasion_before_filter": 1.0,
+      "evasion_after_filter": 1.0,
+      "evasion_survived": true,
+      "median_snr_db": -1.741570234298706
+    },
+    {
+      "scenario": "PostHoc_Telephony",
+      "eps": 0.005,
+      "evasion_before_filter": 1.0,
+      "evasion_after_filter": 1.0,
+      "evasion_survived": true,
+      "median_snr_db": -1.7416138648986816
+    },
+    {
+      "scenario": "PostHoc_Telephony",
+      "eps": 0.01,
+      "evasion_before_filter": 1.0,
+      "evasion_after_filter": 1.0,
+      "evasion_survived": true,
+      "median_snr_db": -1.7413402795791626
+    },
+    {
+      "scenario": "Through_Differentiable_Filter",
+      "eps": 0.0005,
+      "evasion_before_filter": null,
+      "evasion_after_filter": 1.0,
+      "evasion_survived": true,
+      "median_snr_db": 58.24847412109375
+    },
+    {
+      "scenario": "Through_Differentiable_Filter",
+      "eps": 0.001,
+      "evasion_before_filter": null,
+      "evasion_after_filter": 1.0,
+      "evasion_survived": true,
+      "median_snr_db": 53.191497802734375
+    },
+    {
+      "scenario": "Through_Differentiable_Filter",
+      "eps": 0.002,
+      "evasion_before_filter": null,
+      "evasion_after_filter": 1.0,
+      "evasion_survived": true,
+      "median_snr_db": 47.93728256225586
+    },
+    {
+      "scenario": "Through_Differentiable_Filter",
+      "eps": 0.005,
+      "evasion_before_filter": null,
+      "evasion_after_filter": 1.0,
+      "evasion_survived": true,
+      "median_snr_db": 40.07316970825195
+    },
+    {
+      "scenario": "Through_Differentiable_Filter",
+      "eps": 0.01,
+      "evasion_before_filter": null,
+      "evasion_after_filter": 1.0,
+      "evasion_survived": true,
+      "median_snr_db": 34.14760971069336
+    }
+  ],
+  "blackbox_attacks": [
+    {
+      "attack_type": "Black-Box (Fixed)",
+      "attack_name": "noise_20dB",
+      "evasion_rate": 1.0,
+      "median_snr_db": 20.023269653320312,
+      "threat_model": "Query-free / Perturbation transform"
+    },
+    {
+      "attack_type": "Black-Box (Fixed)",
+      "attack_name": "noise_10dB",
+      "evasion_rate": 1.0,
+      "median_snr_db": 10.023269653320312,
+      "threat_model": "Query-free / Perturbation transform"
+    },
+    {
+      "attack_type": "Black-Box (Fixed)",
+      "attack_name": "telephony_300-3400Hz",
+      "evasion_rate": 0.6111111111111112,
+      "median_snr_db": -1.7015211582183838,
+      "threat_model": "Query-free / Perturbation transform"
+    },
+    {
+      "attack_type": "Black-Box (Fixed)",
+      "attack_name": "gain_0.5",
+      "evasion_rate": 0.0,
+      "median_snr_db": 6.020600318908691,
+      "threat_model": "Query-free / Perturbation transform"
+    },
+    {
+      "attack_type": "Black-Box (Fixed)",
+      "attack_name": "shift_10pct",
+      "evasion_rate": 0.3888888888888889,
+      "median_snr_db": -3.9284093379974365,
+      "threat_model": "Query-free / Perturbation transform"
+    },
+    {
+      "attack_type": "Black-Box (Query)",
+      "attack_name": "random_search_b50",
+      "evasion_rate": 1.0,
+      "median_snr_db": 13.99062728881836,
+      "threat_model": "Score-query derivative-free optimization"
+    }
+  ],
+  "merged_robustness": [
+    {
+      "attack_category": "White-Box Gradient",
+      "attack": "FGSM (eps=0.001)",
+      "evasion_rate": 0.3333333432674408,
+      "median_snr_db": 50.39232635498047,
+      "threat_model": "Full white-box knowledge (loss gradient)"
+    },
+    {
+      "attack_category": "White-Box Gradient",
+      "attack": "FGSM (eps=0.005)",
+      "evasion_rate": 0.8333333134651184,
+      "median_snr_db": 36.41288375854492,
+      "threat_model": "Full white-box knowledge (loss gradient)"
+    },
+    {
+      "attack_category": "White-Box Gradient",
+      "attack": "FGSM (eps=0.01)",
+      "evasion_rate": 0.8888888955116272,
+      "median_snr_db": 30.39228057861328,
+      "threat_model": "Full white-box knowledge (loss gradient)"
+    },
+    {
+      "attack_category": "White-Box Gradient",
+      "attack": "PGD-20 (eps=0.001)",
+      "evasion_rate": 1.0,
+      "median_snr_db": 52.13670349121094,
+      "threat_model": "Full white-box knowledge (loss gradient)"
+    },
+    {
+      "attack_category": "White-Box Gradient",
+      "attack": "PGD-20 (eps=0.005)",
+      "evasion_rate": 1.0,
+      "median_snr_db": 40.063812255859375,
+      "threat_model": "Full white-box knowledge (loss gradient)"
+    },
+    {
+      "attack_category": "White-Box Gradient",
+      "attack": "PGD-20 (eps=0.01)",
+      "evasion_rate": 1.0,
+      "median_snr_db": 33.993751525878906,
+      "threat_model": "Full white-box knowledge (loss gradient)"
+    },
+    {
+      "attack_category": "White-Box Gradient",
+      "attack": "RandomNoise (eps=0.001)",
+      "evasion_rate": 0.0555555559694767,
+      "median_snr_db": 50.39232635498047,
+      "threat_model": "Full white-box knowledge (loss gradient)"
+    },
+    {
+      "attack_category": "White-Box Gradient",
+      "attack": "RandomNoise (eps=0.005)",
+      "evasion_rate": 1.0,
+      "median_snr_db": 36.41288375854492,
+      "threat_model": "Full white-box knowledge (loss gradient)"
+    },
+    {
+      "attack_category": "White-Box Gradient",
+      "attack": "RandomNoise (eps=0.01)",
+      "evasion_rate": 1.0,
+      "median_snr_db": 30.39228057861328,
+      "threat_model": "Full white-box knowledge (loss gradient)"
+    },
+    {
+      "attack_category": "White-Box Channel Aware",
+      "attack": "TelephonyFilter-PGD (eps=0.001)",
+      "evasion_rate": 1.0,
+      "median_snr_db": 53.191497802734375,
+      "threat_model": "White-box backprop through channel filter"
+    },
+    {
+      "attack_category": "White-Box Channel Aware",
+      "attack": "TelephonyFilter-PGD (eps=0.005)",
+      "evasion_rate": 1.0,
+      "median_snr_db": 40.07316970825195,
+      "threat_model": "White-box backprop through channel filter"
+    },
+    {
+      "attack_category": "Black-Box (Fixed)",
+      "attack": "noise_20dB",
+      "evasion_rate": 1.0,
+      "median_snr_db": 20.023269653320312,
+      "threat_model": "Query-free / Perturbation transform"
+    },
+    {
+      "attack_category": "Black-Box (Fixed)",
+      "attack": "noise_10dB",
+      "evasion_rate": 1.0,
+      "median_snr_db": 10.023269653320312,
+      "threat_model": "Query-free / Perturbation transform"
+    },
+    {
+      "attack_category": "Black-Box (Fixed)",
+      "attack": "telephony_300-3400Hz",
+      "evasion_rate": 0.6111111111111112,
+      "median_snr_db": -1.7015211582183838,
+      "threat_model": "Query-free / Perturbation transform"
+    },
+    {
+      "attack_category": "Black-Box (Fixed)",
+      "attack": "gain_0.5",
+      "evasion_rate": 0.0,
+      "median_snr_db": 6.020600318908691,
+      "threat_model": "Query-free / Perturbation transform"
+    },
+    {
+      "attack_category": "Black-Box (Fixed)",
+      "attack": "shift_10pct",
+      "evasion_rate": 0.3888888888888889,
+      "median_snr_db": -3.9284093379974365,
+      "threat_model": "Query-free / Perturbation transform"
+    },
+    {
+      "attack_category": "Black-Box (Query)",
+      "attack": "random_search_b50",
+      "evasion_rate": 1.0,
+      "median_snr_db": 13.99062728881836,
+      "threat_model": "Score-query derivative-free optimization"
+    }
+  ]
+}

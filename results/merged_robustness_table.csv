@@ -1,0 +1,18 @@
+attack_category,attack,evasion_rate,median_snr_db,threat_model
+White-Box Gradient,FGSM (eps=0.001),0.3333333432674408,50.39232635498047,Full white-box knowledge (loss gradient)
+White-Box Gradient,FGSM (eps=0.005),0.8333333134651184,36.41288375854492,Full white-box knowledge (loss gradient)
+White-Box Gradient,FGSM (eps=0.01),0.8888888955116272,30.39228057861328,Full white-box knowledge (loss gradient)
+White-Box Gradient,PGD-20 (eps=0.001),1.0,52.13670349121094,Full white-box knowledge (loss gradient)
+White-Box Gradient,PGD-20 (eps=0.005),1.0,40.063812255859375,Full white-box knowledge (loss gradient)
+White-Box Gradient,PGD-20 (eps=0.01),1.0,33.993751525878906,Full white-box knowledge (loss gradient)
+White-Box Gradient,RandomNoise (eps=0.001),0.0555555559694767,50.39232635498047,Full white-box knowledge (loss gradient)
+White-Box Gradient,RandomNoise (eps=0.005),1.0,36.41288375854492,Full white-box knowledge (loss gradient)
+White-Box Gradient,RandomNoise (eps=0.01),1.0,30.39228057861328,Full white-box knowledge (loss gradient)
+White-Box Channel Aware,TelephonyFilter-PGD (eps=0.001),1.0,53.191497802734375,White-box backprop through channel filter
+White-Box Channel Aware,TelephonyFilter-PGD (eps=0.005),1.0,40.07316970825195,White-box backprop through channel filter
+Black-Box (Fixed),noise_20dB,1.0,20.023269653320312,Query-free / Perturbation transform
+Black-Box (Fixed),noise_10dB,1.0,10.023269653320312,Query-free / Perturbation transform
+Black-Box (Fixed),telephony_300-3400Hz,0.6111111111111112,-1.7015211582183838,Query-free / Perturbation transform
+Black-Box (Fixed),gain_0.5,0.0,6.020600318908691,Query-free / Perturbation transform
+Black-Box (Fixed),shift_10pct,0.3888888888888889,-3.9284093379974365,Query-free / Perturbation transform
+Black-Box (Query),random_search_b50,1.0,13.99062728881836,Score-query derivative-free optimization

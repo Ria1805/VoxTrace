@@ -1,0 +1,11 @@
+scenario,eps,evasion_before_filter,evasion_after_filter,evasion_survived,median_snr_db
+PostHoc_Telephony,0.0005,0.9444444179534912,0.9444444179534912,True,-1.741581916809082
+PostHoc_Telephony,0.001,1.0,1.0,True,-1.7415895462036133
+PostHoc_Telephony,0.002,1.0,1.0,True,-1.741570234298706
+PostHoc_Telephony,0.005,1.0,1.0,True,-1.7416138648986816
+PostHoc_Telephony,0.01,1.0,1.0,True,-1.7413402795791626
+Through_Differentiable_Filter,0.0005,,1.0,True,58.24847412109375
+Through_Differentiable_Filter,0.001,,1.0,True,53.191497802734375
+Through_Differentiable_Filter,0.002,,1.0,True,47.93728256225586
+Through_Differentiable_Filter,0.005,,1.0,True,40.07316970825195
+Through_Differentiable_Filter,0.01,,1.0,True,34.14760971069336
