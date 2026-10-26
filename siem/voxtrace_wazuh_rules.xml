@@ -1,0 +1,34 @@
+<!-- Owner: Tanay. Drop in /var/ossec/etc/rules/local_rules.xml (or its own file).
+     Input: VoxTrace appends JSON lines to $VOXTRACE_HOME/voxtrace-events.jsonl, e.g.
+       {"voxtrace":{"event":"incident","verdict":"FAKE","severity":"HIGH","seq":7,"head":"…","head_sig":"…"}}
+       {"voxtrace":{"event":"verify","chain_intact":false,"problems":[…]}}
+     Agent ossec.conf:
+       <localfile><log_format>json</log_format><location>/path/to/vt-data/voxtrace-events.jsonl</location></localfile>
+     Shipping these lines off the box is also what makes rollback/wipe detectable (external head).
+     STILL UNTESTED against a live Wazuh: run /var/ossec/bin/wazuh-logtest with sample lines first.
+     MITRE: T1566.004 Spearphishing Voice, T1656 Impersonation - confirm against current ATT&CK. -->
+<group name="voxtrace,">
+  <rule id="100500" level="3">
+    <decoded_as>json</decoded_as>
+    <field name="voxtrace.event">incident</field>
+    <description>VoxTrace: incident logged</description>
+  </rule>
+  <rule id="100501" level="7">
+    <if_sid>100500</if_sid>
+    <field name="voxtrace.verdict">^FAKE$</field>
+    <description>VoxTrace: synthetic media detected</description>
+    <mitre><id>T1656</id></mitre>
+  </rule>
+  <rule id="100502" level="10">
+    <if_sid>100501</if_sid>
+    <field name="voxtrace.severity">^HIGH$|^CRITICAL$</field>
+    <description>VoxTrace: high-severity deepfake scam attempt</description>
+    <mitre><id>T1566.004</id><id>T1656</id></mitre>
+  </rule>
+  <rule id="100503" level="12">
+    <decoded_as>json</decoded_as>
+    <field name="voxtrace.event">verify</field>
+    <field name="voxtrace.chain_intact">false</field>
+    <description>VoxTrace: evidence ledger integrity failure (possible tampering)</description>
+  </rule>
+</group>

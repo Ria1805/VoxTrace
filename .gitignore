@@ -1,0 +1,10 @@
+*.key
+*.db
+*.db.head
+evidence/
+__pycache__/
+.venv/
+models/
+demo_audio/
+*.joblib
+.pytest_cache/

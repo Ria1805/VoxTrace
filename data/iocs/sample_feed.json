@@ -1,0 +1,6 @@
+{"source": "EXAMPLE-ONLY (replace with real OSINT)",
+ "indicators": [
+  {"type": "domain", "value": "example-scam-bank-login.test", "tag": "phishing"},
+  {"type": "phone", "value": "+910000000000", "tag": "vishing"},
+  {"type": "tts_tool", "value": "example-voice-clone-app", "tag": "voice-cloning"}
+ ]}

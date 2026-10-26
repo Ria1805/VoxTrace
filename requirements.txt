@@ -1,0 +1,12 @@
+numpy
+scipy
+scikit-learn
+librosa
+soundfile
+joblib
+fastapi
+uvicorn
+python-multipart
+opencv-python
+pytest
+# add when you build real models: torch torchvision mediapipe onnxruntime
