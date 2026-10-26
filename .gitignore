@@ -3,8 +3,11 @@
 *.db.head
 evidence/
 __pycache__/
-.venv/
-models/
-demo_audio/
-*.joblib
+
+data/itw/
+data/*.zip
+models/*.npz
+models/*trial*
+vt-data/
 .pytest_cache/
+venv/
