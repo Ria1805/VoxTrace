@@ -11,7 +11,7 @@ def fuse(audio_score, video_score, w_audio=0.5, w_video=0.5):
     parts = [(audio_score, w_audio), (video_score, w_video)]
     parts = [(s, w) for s, w in parts if s is not None]
     if not parts:
-        raise ValueError("need at least one modality score")
+        return None
     tot = sum(w for _, w in parts)
     return float(sum(s * w for s, w in parts) / tot)
 
@@ -22,4 +22,6 @@ def fit_logistic_fusion(audio_scores, video_scores, labels):
 
 
 def verdict_from_score(score, threshold=0.5):
+    if score is None:
+        return "UNSCORED"
     return "FAKE" if score >= threshold else "REAL"

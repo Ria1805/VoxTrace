@@ -23,6 +23,18 @@ def make_wavs(d, n=12):
 def test_fusion_handles_missing_modality():
     assert fuse(0.8, None) == 0.8
     assert abs(fuse(0.8, 0.4) - 0.6) < 1e-9
+    assert fuse(None, None) is None
+
+
+def test_unreadable_video_gives_unscored_never_fake(tmp_path, make_ledger):
+    from voxtrace.video_detector import VideoDetector
+    from voxtrace.fusion import verdict_from_score
+    vid = VideoDetector()
+    # Unreadable or empty video frames should return None, not 0.5
+    assert vid.score_frames([]) is None
+    # Empty non-existent path
+    assert vid.score(os.path.join(tmp_path, "corrupt.mp4")) is None
+    assert verdict_from_score(None) == "UNSCORED"
 
 
 def test_end_to_end_and_tamper_detection(tmp_path, make_ledger):

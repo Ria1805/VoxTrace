@@ -1,0 +1,25 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Orbitron:wght@500;600;700;800;900&display=swap');
+@import 'tailwindcss';
+@theme {
+ --font-sans: 'Inter', sans-serif;
+ --font-mono: 'JetBrains Mono', monospace;
+ --font-orbitron: 'Orbitron', sans-serif;
+}
+:root { color-scheme: dark; background: #05070f; color: #e2e8f0; }
+body { margin: 0; min-width: 320px; }
+button, summary { cursor: pointer; }
+button:disabled { cursor: not-allowed; opacity: .5; }
+button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible { outline: 2px solid #00f0ff; outline-offset: 4px; }
+.glass-panel { background: linear-gradient(135deg, #0a0e1fe8, #080c1ed9); border: 1px solid #00f0ff30; backdrop-filter: blur(16px); box-shadow: 0 8px 32px #0005, inset 0 1px #ffffff05; }
+.glow-cyan { box-shadow: 0 0 20px #00f0ff25; }
+.glow-fake { box-shadow: 0 0 25px #ff005530; }
+.glow-real { box-shadow: 0 0 25px #00f5a030; }
+.glow-unscored { box-shadow: 0 0 25px #f59e0b25; }
+.scanlines { background: repeating-linear-gradient(0deg, transparent 0 3px, #00f0ff0b 3px 4px); }
+.cyber-grid { background-image: linear-gradient(#00f0ff09 1px,transparent 1px),linear-gradient(90deg,#00f0ff09 1px,transparent 1px); background-size: 48px 48px; mask-image: linear-gradient(transparent,black 25%,transparent); }
+@keyframes gradient { 0%,100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+@keyframes shine { from { background-position: 200% 0; } to { background-position: -200% 0; } }
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@keyframes spin { to { transform: rotate(360deg); } }
+* { scrollbar-width: thin; scrollbar-color: #155e75 #05070f; }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; } }

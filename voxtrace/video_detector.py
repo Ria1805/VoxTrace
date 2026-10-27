@@ -223,6 +223,8 @@ def model_fingerprint(path: str | Path = DEFAULT_MODEL_PATH) -> Optional[str]:
 def predict_video(video_path: str | Path, model_path: str | Path = DEFAULT_MODEL_PATH) -> dict:
     """Score one video. Never raises for bad input; returns status='error' instead of a verdict."""
     base = {"status": "ok", "p_fake": None, "n_frames": 0, "model_version": MODEL_VERSION, "error": None}
+    if not Path(model_path).is_file():
+        return {**base, "status": "error", "error": "No trained video model is available"}
     try:
         faces = extract_face_frames(video_path)
     except VideoUnreadableError as e:
@@ -276,6 +278,16 @@ class VideoDetector:
     def predict(self, video_path: str | Path) -> dict:
         """Full result dict (status, p_fake, n_frames, error) for logging/debugging."""
         return predict_video(video_path, self.model_path)
+
+    def score_frames(self, frames) -> Optional[float]:
+        """Score prepared RGB face crops; unavailable models remain unscored."""
+        if not frames or not self.model_path.is_file():
+            return None
+        model, device = load_model(self.model_path)
+        torch = _torch()
+        with torch.no_grad():
+            logits = model(_to_tensor(frames).to(device)).squeeze(1)
+            return float(torch.sigmoid(logits).mean().item())
 
 
 # --------------------------------------------------------------------------- data prep

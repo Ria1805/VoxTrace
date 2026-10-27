@@ -17,7 +17,8 @@ class ThreatIntel:
             for ind in feed.get("indicators", []):
                 key = (ind["type"], str(ind["value"]).lower())
                 self.index.setdefault(key, []).append(
-                    {"source": feed.get("source", os.path.basename(fp)), "tag": ind.get("tag", "")})
+                    {"value": str(ind["value"]), "source": feed.get("source", os.path.basename(fp)),
+                     "tag": ind.get("tag", "")})
 
     def correlate(self, observables: dict):
         """observables like {"domain": [...], "phone": [...], "sha256": [...], "tts_tool": [...]}"""
