@@ -507,6 +507,21 @@
     };
     severityChip.classList.add(sevClassMap[sev] || 'badge-severity-none');
 
+    // Warnings Banner
+    const warningsList = document.getElementById('analysisWarningsList');
+    const warningsBox = document.getElementById('analysisWarningsBox');
+    if (warningsList && warningsBox) {
+      warningsList.textContent = '';
+      if (Array.isArray(data.warnings) && data.warnings.length > 0) {
+        data.warnings.forEach(w => {
+          warningsList.appendChild(el('li', '', w));
+        });
+        warningsBox.classList.remove('hidden');
+      } else {
+        warningsBox.classList.add('hidden');
+      }
+    }
+
     // 3. Score Meters
     // Audio Score
     if (data.audio_score !== null && data.audio_score !== undefined && !isNaN(data.audio_score)) {
