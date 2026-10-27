@@ -5,7 +5,8 @@
      Agent ossec.conf:
        <localfile><log_format>json</log_format><location>/path/to/vt-data/voxtrace-events.jsonl</location></localfile>
      Shipping these lines off the box is also what makes rollback/wipe detectable (external head).
-     STILL UNTESTED against a live Wazuh: run /var/ossec/bin/wazuh-logtest with sample lines first.
+     Live smoke test: Wazuh 4.14.9 collected the event file; synthetic events triggered 100502 (level 10) and 100503 (level 12). See siem/README.md.
+     Scope: synthetic routing only; no real-media alert or off-host head verification. The bundled MITRE DB lacked T1566.004 and T1656, but rules still matched.
      MITRE: T1566.004 Spearphishing Voice, T1656 Impersonation - confirm against current ATT&CK. -->
 <group name="voxtrace,">
   <rule id="100500" level="3">

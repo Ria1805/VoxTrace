@@ -1,0 +1,2 @@
+{"voxtrace":{"event":"incident","verdict":"FAKE","severity":"HIGH","test":true,"seq":999999,"head":"wazuh-live-test","head_sig":"wazuh-live-test"}}
+{"voxtrace":{"event":"verify","chain_intact":false,"problems":["synthetic Wazuh integration test"],"test":true}}

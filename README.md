@@ -10,7 +10,7 @@ Academic prototype combining audio/video detection, local threat-intelligence co
 - Equal-weight fusion renormalises over available scores; weights and thresholds are not calibrated on a validation set.
 - SHA-256 evidence hashes, HMAC ledger, verification and local event logging are implemented. A local event log is not an independent off-host SIEM anchor. HMAC is not non-repudiation.
 - Local threat intel loads JSON feeds from `data/iocs/`, including example indicators and voice-cloning-tool references. The IOC rule escalates exact matches one severity tier (capped at HIGH); tool names are context-only. Use `tools/build_openphish_feed.py` to convert a separately downloaded, permitted OpenPhish community feed. Live feed refresh and online enrichment are not enabled.
-- Wazuh rules and an attack harness exist. Live Wazuh integration and FGSM/PGD evaluation are not verified.
+- Wazuh rules and an attack harness exist. A local Wazuh 4.14.9 collection/rule smoke test matched 100502 (level 10) and 100503 (level 12) using synthetic events; it did not verify media detection or an off-host ledger head. FGSM/PGD evaluation remains unverified. See `siem/README.md`.
 - Audio held-out metrics in the evaluation view are recomputed from branch-provided score CSVs; they are not independently reproduced because the source dataset is not included. Calibration and video accuracy remain unmeasured. Automatic demo seeding, random forensic timelines and synthetic live detections have been removed.
 - Detection history starts empty and counts only analyzed uploads. The video preview inventory is shown separately and is not treated as evaluated detections.
 - Video identity grouping currently uses the first filename identity token. Audit source and target identities before claiming fully identity-disjoint evaluation.
@@ -71,6 +71,6 @@ See the current test output for API, pipeline, audio inference, IOC rules, and b
 - Bhavika: video classifier, fusion, frontend and integration.
 - Shaurya: training support and robustness evaluation.
 - Harshita: real IOC feeds, enrichment and response thresholds.
-- Tanay: ledger, backend, threat model and live SIEM integration.
+- Tanay: local API/key setup and validation, live Wazuh integration testing, and evidence-integrity paper contribution.
 
 Every future research metric needs a run ID, dataset/split, model hash and measurement method. Inference records show their signed record hash and `not applicable (user upload)` split; they are not evaluation runs.
