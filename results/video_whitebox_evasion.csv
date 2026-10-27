@@ -1,0 +1,11 @@
+model,attack,eps_norm,eps_pixel_255,evasion_rate,n_attacked,clean_detection_rate
+VideoAdapter (Placeholder),FGSM,0.002,0.255,0.0,15,1.0
+VideoAdapter (Placeholder),PGD-20,0.002,0.255,0.0,15,1.0
+VideoAdapter (Placeholder),FGSM,0.005,0.6375000000000001,0.06666667014360428,15,1.0
+VideoAdapter (Placeholder),PGD-20,0.005,0.6375000000000001,0.13333334028720856,15,1.0
+VideoAdapter (Placeholder),FGSM,0.01,1.2750000000000001,0.800000011920929,15,1.0
+VideoAdapter (Placeholder),PGD-20,0.01,1.2750000000000001,0.8666666746139526,15,1.0
+VideoAdapter (Placeholder),FGSM,0.02,2.5500000000000003,1.0,15,1.0
+VideoAdapter (Placeholder),PGD-20,0.02,2.5500000000000003,1.0,15,1.0
+VideoAdapter (Placeholder),FGSM,0.05,6.375,1.0,15,1.0
+VideoAdapter (Placeholder),PGD-20,0.05,6.375,1.0,15,1.0
