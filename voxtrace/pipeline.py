@@ -1,7 +1,7 @@
 from .custody import hash_evidence
 from .fusion import fuse, verdict_from_score
 from .threat_intel import ThreatIntel
-from .playbook import respond
+from .playbook import respond, CONTEXT_ONLY_TYPES
 
 
 class VoxTrace:
@@ -24,7 +24,16 @@ class VoxTrace:
         fused = fuse(a, v)
         verdict = verdict_from_score(fused, self.threshold)
         iocs = self.intel.correlate(observables or {})
-        severity, actions = respond(fused, iocs) if verdict == "FAKE" else ("NONE", ["Log only"])
+
+        # IOC rule (data/iocs/MATCH_RULE.md): an exact IOC match is evidence even when the
+        # detector says REAL, so the playbook runs for it too. Tool references are context only.
+        # The verdict stays the detector's own; only the severity/actions use the IOC.
+        exact_hits = [m for m in iocs if m.get("type") not in CONTEXT_ONLY_TYPES]
+        if verdict == "FAKE" or exact_hits:
+            severity, actions = respond(fused, iocs)
+        else:
+            severity, actions = "NONE", ["Log only"]
+
         versions = {"audio": getattr(self.audio, "version", None), "video": getattr(self.video, "version", None)}
         rh = self.ledger.log_incident(paths, a, v, fused, verdict, versions, iocs, [severity] + actions,
                                       actor=actor, evidence_files=received, severity=severity)

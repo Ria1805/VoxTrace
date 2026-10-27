@@ -1,0 +1,11 @@
+{"source": "Public reports: FTC consumer alert coverage (2023), Consumer Reports voice-cloning study (2025), Recorded Future 'I Have No Mouth and I Must Do Crime' (2023), US Senate letters to voice-cloning firms (Apr 2026)",
+ "indicators": [
+  {"type": "tts_tool", "value": "ElevenLabs", "tag": "voice-cloning"},
+  {"type": "tts_tool", "value": "Resemble AI", "tag": "voice-cloning"},
+  {"type": "tts_tool", "value": "Voice.ai", "tag": "voice-cloning"},
+  {"type": "tts_tool", "value": "Descript", "tag": "voice-cloning"},
+  {"type": "tts_tool", "value": "Lovo", "tag": "voice-cloning"},
+  {"type": "tts_tool", "value": "PlayHT", "tag": "voice-cloning"},
+  {"type": "tts_tool", "value": "Speechify", "tag": "voice-cloning"},
+  {"type": "tts_tool", "value": "VEED", "tag": "voice-cloning"}
+ ]}

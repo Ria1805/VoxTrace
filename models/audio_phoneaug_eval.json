@@ -1,0 +1,45 @@
+{
+  "n_train": 21165,
+  "n_test": 10614,
+  "train_speakers": 38,
+  "test_speakers": [
+    "Arnold Schwarzenegger",
+    "Barack Obama",
+    "Donald Trump",
+    "Dwight Eisenhower",
+    "Frank Sinatra",
+    "Gilbert Gottfried",
+    "Harry Truman",
+    "Jerry Seinfeld",
+    "John Cleese",
+    "Lyndon Johnson",
+    "Martin Luther King",
+    "Mitch Hedberg",
+    "Mr. Rogers",
+    "Nelson Mandela",
+    "Tucker Carlson",
+    "Winston Churchill"
+  ],
+  "seed": 42,
+  "phone_aug": true,
+  "clean": {
+    "precision": 0.7948448185165702,
+    "recall": 0.7627460878344271,
+    "f1": 0.7784647089129315,
+    "accuracy": 0.9189749387601281,
+    "fpr": 0.04517548940113518,
+    "fnr": 0.23725391216557296,
+    "roc_auc": 0.9401402984322336,
+    "eer": 0.12001507077575199
+  },
+  "phone_band_limited": {
+    "precision": 0.6047446722959389,
+    "recall": 0.7592125189298334,
+    "f1": 0.6732318710832588,
+    "accuracy": 0.8624458262671942,
+    "fpr": 0.11386540020850226,
+    "fnr": 0.2407874810701666,
+    "roc_auc": 0.8948592071803644,
+    "eer": 0.17629486375636308
+  }
+}
