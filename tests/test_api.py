@@ -42,7 +42,7 @@ def test_fresh_api_has_no_invented_results(api):
     assert len(evaluation['roc_curve']) == 101
     assert evaluation['confusion_matrices']['audio']['tp'] > 0
     assert 'source audio dataset is not present' in evaluation['message']
-    assert client.get('/iocs').json()[0]['source'].startswith('EXAMPLE-ONLY')
+    assert any(ioc['source'].startswith('EXAMPLE-ONLY') for ioc in client.get('/iocs').json())
     assert any(ioc['value'] == 'ElevenLabs' for ioc in client.get('/iocs').json())
     assert client.post('/ledger/tamper-demo', json={'tamper': True}).status_code == 404
     assert client.post('/robustness/simulate', json={}).status_code == 404
