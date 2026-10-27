@@ -8,5 +8,6 @@ fastapi
 uvicorn
 python-multipart
 opencv-python
+torch
+torchvision
 pytest
-# add when you build real models: torch torchvision mediapipe onnxruntime

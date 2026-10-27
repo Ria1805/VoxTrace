@@ -43,6 +43,25 @@ For an existing ledger set `VOXTRACE_HOME` and exactly one of `VOXTRACE_KEY_FILE
 
 `data/video_preview/download/` contains a small, public five-pair preview from UniDataPro, marked CC BY-NC-ND 4.0. Its source, attribution and limitations are documented in [data/video_preview/README.md](data/video_preview/README.md). It is inspection-only and is not used by the detector: the preview is insufficient for training or held-out evaluation. A suitable licensed dataset and trained `models/video.pt` are still required for video scores; otherwise video uploads return `UNSCORED` with the reason.
 
+### Train the video detector with UADFV
+
+The video training CLI accepts an extracted dataset with `real/` and `fake/`
+subfolders. For UADFV, keep its downloaded files under
+`data/datasets/UADFV/`; the numeric IDs in `0000.mp4` and `0000_fake.mp4` are
+grouped together so paired clips stay in the same split. The dataset itself and
+trained weights are not committed.
+
+```powershell
+python -m voxtrace.video_detector prepare --data-root data\datasets\UADFV --cache data\video_frames --seed 42
+python -m voxtrace.video_detector train --cache data\video_frames --out models\video.pt --epochs 5 --workers 0
+python -m voxtrace.video_detector test --cache data\video_frames --model models\video.pt --workers 0
+```
+
+Install dependencies from `requirements.txt` first. The first training run may
+download ImageNet EfficientNet weights. Check the prepared manifest and
+identity grouping before training; UADFV is small, so report its results only
+as an experiment and do not claim generalization to other deepfake datasets.
+
 ### Validation
 
 ```powershell
