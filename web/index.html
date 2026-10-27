@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VoxTrace — Deepfake Detection & Chain of Custody</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="brand">
+        <div class="brand-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            <path d="M9 12l2 2 4-4"/>
+          </svg>
+        </div>
+        <div>
+          <h1 class="brand-title">VoxTrace</h1>
+          <p class="brand-subtitle">Multimodal Deepfake Detection &amp; Cryptographic Chain of Custody</p>
+        </div>
+      </div>
+      <div class="header-actions">
+        <button id="themeToggleBtn" class="btn btn-secondary btn-sm" aria-label="Toggle theme">
+          <span id="themeIcon">🌙</span> <span id="themeText">Dark</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Top Status Bar -->
+    <section class="status-bar-card" aria-label="System Status">
+      <div class="status-bar-header">
+        <div class="status-title-group">
+          <span class="status-label">SYSTEM &amp; LEDGER STATUS</span>
+          <span id="lastVerifiedTime" class="text-muted text-xs">Checking status...</span>
+        </div>
+        <div class="status-actions">
+          <button id="verifyLedgerBtn" class="btn btn-outline btn-sm">
+            <span class="btn-icon">🛡️</span>
+            <span>Verify evidence log</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="status-chips-grid">
+        <!-- Audio Model -->
+        <div class="status-chip" id="audioModelChip">
+          <span class="chip-dot dot-neutral" id="audioModelDot"></span>
+          <span class="chip-label">Audio model:</span>
+          <span class="chip-val" id="audioModelVal">Loading...</span>
+        </div>
+
+        <!-- Video Detector -->
+        <div class="status-chip" id="videoDetectorChip">
+          <span class="chip-dot dot-neutral" id="videoDetectorDot"></span>
+          <span class="chip-label">Video detector:</span>
+          <span class="chip-val" id="videoDetectorVal">Loading...</span>
+        </div>
+
+        <!-- Evidence Log Badge -->
+        <div class="status-chip badge-chip" id="ledgerStatusChip">
+          <span class="chip-dot dot-neutral" id="ledgerDot"></span>
+          <span class="chip-val font-semibold" id="ledgerStatusVal">Checking ledger...</span>
+        </div>
+
+        <!-- Key Pinning Note -->
+        <div class="status-chip" id="keyPinningChip">
+          <span class="chip-label">Key:</span>
+          <span class="chip-val text-xs" id="keyPinningVal">Loading...</span>
+        </div>
+      </div>
+
+      <!-- Video Placeholder Warning Banner -->
+      <div id="videoPlaceholderWarning" class="alert-banner alert-warning hidden" role="alert">
+        <span class="alert-icon">⚠️</span>
+        <div class="alert-content">
+          <strong>Warning:</strong> PLACEHOLDER, scores are not real detections
+        </div>
+      </div>
+
+      <!-- Tampering Alert Details -->
+      <div id="tamperAlertBox" class="alert-banner alert-danger hidden" role="alert">
+        <div class="alert-header">
+          <span class="alert-icon">🚨</span>
+          <strong>TAMPERING DETECTED IN EVIDENCE CHAIN</strong>
+        </div>
+        <ul id="tamperProblemsList" class="tamper-problems-list"></ul>
+      </div>
+    </section>
+
+    <!-- Global Error Banner -->
+    <div id="globalErrorBox" class="alert-banner alert-danger hidden" role="alert">
+      <div class="alert-header">
+        <span class="alert-icon">❌</span>
+        <strong id="globalErrorTitle">Error</strong>
+      </div>
+      <div id="globalErrorMessage" class="alert-message"></div>
+      <div id="globalErrorExtra" class="alert-extra hidden"></div>
+    </div>
+
+    <!-- Main Content Layout -->
+    <main class="dashboard-grid">
+      <!-- Left Column: Analyze Panel -->
+      <section class="card panel-analyze" aria-labelledby="analyzeHeading">
+        <div class="card-header">
+          <h2 id="analyzeHeading" class="card-title">Analyze Media</h2>
+          <span class="text-muted text-xs">Audio and/or video</span>
+        </div>
+
+        <form id="analyzeForm" class="analyze-form" novalidate>
+          <!-- Audio Upload Box -->
+          <div class="form-group">
+            <label class="form-label" for="audioInput">
+              <span class="label-icon">🎙️</span> Audio Evidence
+            </label>
+            <div class="drop-zone" id="audioDropZone">
+              <input type="file" id="audioInput" name="audio" accept="audio/*,.wav,.mp3,.ogg,.flac,.m4a" class="file-input-hidden">
+              <div class="drop-zone-prompt" id="audioPrompt">
+                <span class="upload-icon">📁</span>
+                <span class="upload-text">Choose an audio file or drag &amp; drop</span>
+                <span class="upload-hint">WAV, MP3, FLAC, M4A</span>
+              </div>
+              <div class="file-info-preview hidden" id="audioPreviewContainer">
+                <div class="file-meta">
+                  <span class="file-name" id="audioFileName">—</span>
+                  <button type="button" class="btn-icon-clear" id="clearAudioBtn" title="Remove audio">&times;</button>
+                </div>
+                <audio id="audioPreviewPlayer" controls class="media-preview"></audio>
+              </div>
+            </div>
+          </div>
+
+          <!-- Video Upload Box -->
+          <div class="form-group">
+            <label class="form-label" for="videoInput">
+              <span class="label-icon">🎥</span> Video Evidence
+            </label>
+            <div class="drop-zone" id="videoDropZone">
+              <input type="file" id="videoInput" name="video" accept="video/*,.mp4,.mov,.avi,.mkv,.webm" class="file-input-hidden">
+              <div class="drop-zone-prompt" id="videoPrompt">
+                <span class="upload-icon">📹</span>
+                <span class="upload-text">Choose a video file or drag &amp; drop</span>
+                <span class="upload-hint">MP4, MOV, AVI, MKV, WEBM</span>
+              </div>
+              <div class="file-info-preview hidden" id="videoPreviewContainer">
+                <div class="file-meta">
+                  <span class="file-name" id="videoFileName">—</span>
+                  <button type="button" class="btn-icon-clear" id="clearVideoBtn" title="Remove video">&times;</button>
+                </div>
+                <video id="videoPreviewPlayer" controls class="media-preview"></video>
+              </div>
+            </div>
+          </div>
+
+          <!-- Analyze Submit Button -->
+          <div class="form-actions">
+            <button type="submit" id="analyzeSubmitBtn" class="btn btn-primary btn-block" disabled>
+              <span id="analyzeBtnSpinner" class="spinner hidden"></span>
+              <span id="analyzeBtnText">Analyze</span>
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <!-- Right Column: Result Card -->
+      <section id="resultCard" class="card panel-result hidden" aria-labelledby="resultHeading">
+        <div class="card-header">
+          <h2 id="resultHeading" class="card-title">Analysis Verdict</h2>
+          <div id="severityChip" class="badge badge-severity-none">NONE</div>
+        </div>
+
+        <!-- Large Verdict Banner -->
+        <div id="verdictBanner" class="verdict-banner verdict-banner-neutral">
+          <div class="verdict-banner-inner">
+            <span class="verdict-tag">DETECTION VERDICT</span>
+            <div id="verdictText" class="verdict-heading">—</div>
+          </div>
+        </div>
+
+        <!-- Score Meters -->
+        <div class="score-meters-container">
+          <!-- Audio Score -->
+          <div class="score-meter-card">
+            <div class="score-meter-header">
+              <span class="meter-title">Audio Fake Probability</span>
+              <span id="audioScoreLabel" class="meter-val">not provided</span>
+            </div>
+            <div class="meter-bar-track">
+              <div id="audioMeterFill" class="meter-bar-fill" style="width: 0%;"></div>
+            </div>
+          </div>
+
+          <!-- Video Score -->
+          <div class="score-meter-card">
+            <div class="score-meter-header">
+              <span class="meter-title">Video Fake Probability</span>
+              <span id="videoScoreLabel" class="meter-val">not provided</span>
+            </div>
+            <div class="meter-bar-track">
+              <div id="videoMeterFill" class="meter-bar-fill" style="width: 0%;"></div>
+            </div>
+          </div>
+
+          <!-- Fused Score -->
+          <div class="score-meter-card score-meter-fused">
+            <div class="score-meter-header">
+              <span class="meter-title font-semibold">Fused Score (Verdict)</span>
+              <span id="fusedScoreLabel" class="meter-val font-semibold">not provided</span>
+            </div>
+            <div class="meter-bar-track">
+              <div id="fusedMeterFill" class="meter-bar-fill meter-bar-fused" style="width: 0%;"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Playbook Actions Checklist -->
+        <div class="result-section">
+          <h3 class="section-subtitle">
+            <span class="sub-icon">📋</span> Incident-Response Playbook Actions
+          </h3>
+          <ul id="playbookChecklist" class="playbook-checklist"></ul>
+        </div>
+
+        <!-- Threat Intelligence & IOC Matches -->
+        <div class="result-section">
+          <h3 class="section-subtitle">
+            <span class="sub-icon">🎯</span> Threat Intel &amp; IOC Matches
+          </h3>
+          <div id="iocMatchesContainer">
+            <p id="noIocMatchesText" class="text-muted text-sm">No known scam infrastructure matched</p>
+            <div class="table-responsive hidden" id="iocTableWrapper">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Value</th>
+                    <th>Source</th>
+                    <th>Tag</th>
+                  </tr>
+                </thead>
+                <tbody id="iocTableBody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Custody Hashes -->
+        <div class="result-section">
+          <h3 class="section-subtitle">
+            <span class="sub-icon">🔗</span> Chain of Custody &amp; Hashes
+          </h3>
+          <div class="hash-list">
+            <div class="hash-item">
+              <div class="hash-label">Record Hash (HMAC):</div>
+              <div class="hash-box">
+                <code id="recordHashVal" class="hash-code">—</code>
+                <button type="button" class="btn btn-outline btn-xs btn-copy" data-target="recordHashVal">Copy</button>
+              </div>
+            </div>
+            <div class="hash-item">
+              <div class="hash-label">Evidence SHA-256:</div>
+              <div id="evidenceShaList" class="evidence-sha-container"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Incident Log Table -->
+    <section class="card panel-incidents" aria-labelledby="incidentsHeading">
+      <div class="card-header">
+        <div class="incidents-title-group">
+          <h2 id="incidentsHeading" class="card-title">Incident Log</h2>
+          <span id="incidentsCountBadge" class="badge badge-neutral">0 incidents</span>
+        </div>
+        <div class="incidents-actions">
+          <button id="refreshIncidentsBtn" class="btn btn-secondary btn-sm">
+            <span class="btn-icon">🔄</span> Refresh
+          </button>
+        </div>
+      </div>
+
+      <div class="table-responsive">
+        <table class="data-table" id="incidentsTable">
+          <thead>
+            <tr>
+              <th style="width: 50px;">#</th>
+              <th>Time</th>
+              <th>Verdict</th>
+              <th>Fused Score</th>
+              <th>Severity</th>
+              <th>Evidence Hash</th>
+            </tr>
+          </thead>
+          <tbody id="incidentsTableBody">
+            <tr class="empty-state-row">
+              <td colspan="6" class="text-center text-muted">No incidents yet</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+      <p class="text-muted text-xs">
+        VoxTrace Tamper-Evident Chain of Custody &bull; Local FastAPI Backend &bull; All numbers authenticated from API
+      </p>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

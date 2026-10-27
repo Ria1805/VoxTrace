@@ -16,6 +16,8 @@ from typing import Optional
 
 from audioread.exceptions import NoBackendError
 from fastapi import FastAPI, File, Form, HTTPException, Query, UploadFile
+from fastapi.responses import RedirectResponse
+from fastapi.staticfiles import StaticFiles
 
 from .audio_detector import AudioDetector
 from .custody import CustodyLedger, LedgerError, generate_key_file, read_trusted_head
@@ -97,15 +99,24 @@ def decode_record(row, columns):
 
 @app.get("/status")
 def status():
-    video_available = vt.video.model_path.is_file()
-    return {"api": "online", "audio": {"available": _audio.trained, "version": _audio.version},
-            "video": {"available": video_available, "version": vt.video.version,
-                      "reason": None if video_available else "No trained video model is installed."},
-            "research": "unmeasured", "wazuh": "not verified", "provenance": provenance(),
-            "notes": ["Model file availability does not establish detection quality.",
+    video_available = vt.video.model_path.is_file() if hasattr(vt.video, "model_path") else False
+    video_version = getattr(vt.video, "version", "") or ""
+    return {
+        "audio_model_loaded": bool(_audio.trained),
+        "video_detector": video_version,
+        "video_is_placeholder": "PLACEHOLDER" in video_version.upper(),
+        "api": "online",
+        "audio": {"available": _audio.trained, "version": _audio.version},
+        "video": {"available": video_available, "version": video_version,
+                  "reason": None if video_available else "No trained video model is installed."},
+        "research": "unmeasured",
+        "wazuh": "not verified",
+        "provenance": provenance(),
+        "notes": ["Model file availability does not establish detection quality.",
                       "Audio held-out score artifacts are available; the source dataset is not included.",
                       "Audio calibration and video accuracy/robustness remain unmeasured.",
-                      "Video is secondary; equal weights are renormalised over scored modalities."]}
+                      "Video is secondary; equal weights are renormalised over scored modalities."],
+    }
 
 
 @app.get("/dataset/preview")
@@ -405,3 +416,13 @@ def robustness_status():
     return {'evasion_rate': None, 'real_flagged_as_fake': None, 'curve': [],
             'honest_reporting': 'No robustness experiment has been run. Controls configure a proposed experiment only; no detector is being tested.',
             'provenance': {'run_id': 'Not run', 'status': 'UNMEASURED', 'split': 'Not evaluated'}}
+
+WEB_DIR = ROOT / "web"
+WEB_DIR.mkdir(exist_ok=True)
+app.mount("/ui", StaticFiles(directory=str(WEB_DIR), html=True), name="ui")
+
+
+@app.get("/", include_in_schema=False)
+def root_redirect():
+    return RedirectResponse(url="/ui/")
+
