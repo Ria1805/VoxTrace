@@ -3,7 +3,7 @@
 Detection + DFIR (tamper-evident, signed evidence log) + threat-intel correlation + IR playbook.
 Security properties and limitations: **THREAT_MODEL.md**.
 
-## Status (be honest in your update to ma'am)
+## Status 
 | Component | State |
 |---|---|
 | Evidence log (`custody.py`) | **Working**: hash chain + HMAC signatures + signed anchor + off-box head; 67 tests incl. 23-attack matrix; reviewed twice from attacker, correctness and forensics angles. Not "non-repudiation" (see THREAT_MODEL.md) |
